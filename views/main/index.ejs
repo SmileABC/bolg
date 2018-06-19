@@ -1,0 +1,29 @@
+
+<script type="text/template" id="template1">
+<div class="listBox">
+<h1>${title}</h1>
+<p class="colDefault">
+作者：<span class="colInfo">${author}</span> -
+时间：<span class="colInfo">${addTime}</span> -
+阅读：<span class="colInfo">${reading}</span> -
+评论：<span class="colInfo">${pinglun.length}</span>
+</p>
+<dfn><p>${description}</p></dfn>
+<div class="function"><a href="javascript:void(0)" onclick="changview('${_id}')">阅读全文</a></div>
+</div>
+</script>
+<div class="pager">
+<ul class="clear">
+<li class="previous">
+<span>没有上一页了</span>
+<a href="/?category={{category}}&page={{page-1}}">上一页</a>
+</li>
+<li>
+<strong>1 / 1</strong>
+</li>
+<li class="next">
+<span>没有下一页了</span>
+<a href="/?category={{category}}&page={{page+1}}">下一页</a>
+</li>
+</ul>
+</div>

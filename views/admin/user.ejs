@@ -1,0 +1,38 @@
+<!--{% extends 'layout.html' %}-->
+
+
+<ol class="breadcrumb">
+    <li><a href="/">管理首页</a></li>
+    <li><span>用户列表</span></li>
+</ol>
+
+<h3>用户列表</h3>
+
+<%- include('page') %>
+
+<table class="table table-hover table-striped">
+
+    <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>是否是管理员</th>
+    </tr>
+
+    <% message.forEach(function(user){%>
+        <tr>
+            <td><%=user._id.toString()%></td>
+            <td><%=user.name%></td>
+            <td><%=user.pwd%></td>
+            <td>
+                <%if (user.isadmin){%>
+                     是
+                <%}%>
+            </td>
+        </tr>
+    <%})%>
+
+
+</table>
+
+

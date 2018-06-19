@@ -1,0 +1,11 @@
+<nav>
+    <ul class="pager">
+        <li class="previous"><a href="/admin/<%=to%>?page=<%=page-1%>">&larr; 上一页</a></li>
+
+        <li>
+            一共有  <%=len%>  条数据，每页显示 <%=limit%> 条数据，一共 <%=yeshu%> 页，当前第 <%=page+1%> 页
+        </li>
+
+        <li class="next"><a href="/admin/<%=to%>?page=<%=page+1%>">下一页 &rarr;</a></li>
+    </ul>
+</nav>

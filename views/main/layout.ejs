@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>博客</title>
+    <link href="/public/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/public/fontAwesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="/public/js/jquery-1.12.4.min.js"></script>
+    <script src="/public/js/underscore.js"></script>
+</head>
+
+<body>
+
+<header>
+    <div class="backimg"><img src="/public/images/IMG_0293.JPG"></div>
+    <div class="logo"><span></span><img src="/public/images/00002637.png"></div>
+</header>
+
+<nav>
+    <div class="menu">
+
+    </div>
+    <div id="isShowId" style="display: none"><%=isShowId%></div>
+</nav>
+
+
+
+<main class="clear">
+    <div class="mainLeft">
+        <div id="mainLeft">
+        </div>
+        <div class="pager">
+            <ul class="clear">
+                <li class="previous">
+                    <span>没有上一页了</span>
+                    <a href="/?category={{category}}&page={{page-1}}">上一页</a>
+                </li>
+                <li>
+                    <strong>1 / 1</strong>
+                </li>
+                <li class="next">
+                    <span>没有下一页了</span>
+                    <a href="/?category={{category}}&page={{page+1}}">下一页</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mainRight">
+            <%if(loginshow){%>
+            <div class="rightBox" id="loginBox">
+                <div class="title"><span>登录</span></div>
+                <div class="line"><span class="colDark">用户名：</span><input name="username" type="text" /><em></em></div>
+                <div class="line"><span class="colDark">密码：</span><input name="password" type="password" /><em></em></div>
+                <div class="line"><span class="colDark"></span><button>登 录</button></div>
+                <p class="textRight">还没注册？<a href="javascript:;" class="colMint">马上注册</a></p>
+                <p class="colWarning textCenter">
+                </p>
+            </div>
+            <%}%>
+            <div class="rightBox" id="registerBox" style="display: none;">
+                <div class="title"><span>注册</span></div>
+                <div class="line"><span class="colDark">用户名：</span><input name="username" type="text" /></div>
+                <div class="line"><span class="colDark">密码：</span><input name="password" type="password" /></div>
+                <div class="line"><span class="colDark">确认：</span><input name="repassword" type="password" /></div>
+                <div class="line"><span class="colDark"></span><button>注 册</button></div>
+                <p class="textRight">已有账号？<a href="javascript:;" class="colMint">马上登录</a></p>
+                <p class="colWarning textCenter"></p>
+            </div>
+            <div class="rightBox" id="userInfo">
+                <div class="title"><span>用户信息</span></div>
+                <p><span class="colDark"><%=user%></span></p>
+
+                <%if(isadmin){%>
+                    <p>
+                        <span class="colDanger">你好，管理员！</span>
+                        <a href="/admin">进入管理</a>
+                    </p>
+                <%}%>
+                <p><span class="colDanger">你好，欢迎光临我的博客！</span></p>
+                <p><span class="colDark"><a href="/" id="logout">退出</a></span></p>
+            </div>
+
+
+        <div class="rightBox">
+            <div class="title"><span>社区</span></div>
+            <p><a href="http://www.miaov.com" target="_blank" class="colDanger">妙味课堂</a></p>
+            <p><a href="http://bbs.miaov.com" target="_blank" class="colDanger">妙味茶馆</a></p>
+        </div>
+    </div>
+
+
+</main>
+
+<div class="copyright textCenter">Copyright © miaov.com 版权所有 | 京ICP备08102442号</div>
+
+<script type="text/template" id="template1">
+    <div class="listBox">
+        <h1>${title}</h1>
+        <p class="colDefault">
+            作者：<span class="colInfo">${author}</span> -
+            时间：<span class="colInfo">${addTime}</span> -
+            阅读：<span class="colInfo">${reading}</span> -
+            评论：<span class="colInfo">${pinglun.length}</span>
+        </p>
+        <dfn><p>${description}</p></dfn>
+        <div class="function"><a href="javascript:void(0)" onclick="changview('${_id}')">阅读全文</a></div>
+    </div>
+</script>
+
+<script type="text/template" id="viewtemp">
+    <div class="listBox">
+        <h1>${title}</h1>
+        <p class="colDefault">
+            作者：<span class="colInfo">${author}</span> -
+            时间：<span class="colInfo">${addTime}</span> -
+            阅读：<span class="colInfo">${reading}</span> -
+            评论：<span class="colInfo">${pinglun.length}</span>
+        </p>
+        <dfn>
+            ${content}
+        </dfn>
+    </div>
+
+    <div class="listBox message">
+        <h3 class="textLeft"><strong>评论</strong> <span class="em">一共有 <em id="messageCount">${pinglun.length}</em> 条评论</span></h3>
+
+        <$if (isuser){$>
+        <p class="textLeft">zmouse</p>
+        <p class="textLeft clear">
+            <textarea id="messageContent"></textarea>
+            <input type="hidden" id="contentId" value="${isuser.name}">
+            <input type="hidden" id="wenzhangId" value="${_id}">
+            <button id="messageBtn" onclick="mm()" class="submit">提交</button>
+        </p>
+        <$}else{$>
+        <p class="bgDanger" style="line-height: 30px;">你还没有登录，请先登录！</p>
+        <div class="messageList">
+        </div>
+        <$}$>
+        <div class="pager">
+            <ul class="clear">
+                <li class="previous">
+                    <a href="">上一页</a>
+                </li>
+                <li></li>
+                <li class="next">
+                    <a href="">下一页</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="messageList">
+        </div>
+
+        <div class="messageList" style="display: block;">
+            <div class="messageBox">
+                <$if(pinglun.length>0){$>
+                <$for(var i=0;i<pinglun.length;i++){$>
+                <p class="name clear">
+                    <span class="fl">${pinglun[i].user}</span>
+                    <span class="fr">${pinglun[i].pldate}</span>
+                </p>
+                <p style="padding: 10px 0 20px 0">${pinglun[i].plnr}</p>
+                <$}$>
+                <$}else{$>
+                <div class="messageBox"><p>还没有留言</p></div>
+                <$}$>
+            </div>
+        </div>
+    </div>
+</script>
+</body>
+<script src="/public/js/comment.js"></script>
+<script src="/public/js/index.js"></script>
+</html>
