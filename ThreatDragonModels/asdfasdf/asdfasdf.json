@@ -1,0 +1,15 @@
+{
+  "summary": {
+    "title": "asdfasdf"
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "fsaf",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ]
+  }
+}
